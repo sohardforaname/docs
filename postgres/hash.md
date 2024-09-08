@@ -124,26 +124,3 @@ _hash_squeezebucket函数：
 ## 异常处理
 
 异常出现在分裂了一半之后宕机的过程。在别的过程中，
-
-hw_cipher_sm4
-fdw_abort_transaction
-vb_partition_system
-vb_partition_system_dump_restore
-connect_by_bfs
-to_regclass
-modify_constraint
-ustore_modify_constraint
-oracle_trunc
-replica_identity
-audit_privilege
-dblink_sessionA
-dbcc
-nssql_functions
-case_sensitive_test/schema_test
-unsigned_int_test/uint_plus
-mysql_function_prepare
-mysql_trigger
-postgresql_object_type
-column_name
-view_depend_plpgsql
-event_trigger_dup_restore
