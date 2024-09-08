@@ -29,6 +29,14 @@ PG的数据文件以块为单位组织，默认是8KB一个块，块内包含一
 
 ## TOAST文件
 
+TOAST(The Oversized Attribute Storage Technique，超尺寸字段存储技术)是一种用于存储超长的列的技术，由于PG的一个块的长度是8K，且元组不允许跨页，如果有超过了8K的字段长度，则PG会建立一张pg_toast系统表，并用于分段存放过长的字段。
+TOAST策略分成4种：分别是PLAIN，EXTERNA，EXTENDED，MAIN；分别是是否允许压缩和行外存储的排列组合，如果开启了行外存储，在遇到过长的字段是，pg_toast表中就会将这些过长的字段值压缩和切片存储。
+
+TOAST策略选择规则：
+- 如果策略允许压缩，则TOAST优先选择压缩
+- 不管是否压缩，一旦数据超过2KB左右，就会启用行外存储
+- 修改TOAST策略，不会影响现有数据的存储方式
+
 ### pg_filenode.map文件
 
 使用select relname, relfilenode from pg_class查询表的时候，会发现有些表的relfilenode是0，由于在每个数据库中都需要保存一个不同的同名表，这些表被称为Nail表，对于Nail表，我们无法直接查到relfilenode。
